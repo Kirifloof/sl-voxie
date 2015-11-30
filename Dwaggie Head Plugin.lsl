@@ -50,10 +50,10 @@ SetSpineExpressionRaw(float amt) {
     }
 }
 LerpSpineExpression(float amt) {
-    float step = (amt - lastExpression) / 75.0;
+    float step = (amt - lastExpression) / 25.0;
     float c = lastExpression;
     integer i;
-    for (i = 0; i < 74; i++) {
+    for (i = 0; i < 24; i++) {
         c += step;
         SetSpineExpressionRaw(c);
     }
@@ -66,6 +66,7 @@ SetBlush(float amt) {
     float startAlpha = llList2Float(llGetLinkPrimitiveParams(lnBlush, [PRIM_COLOR, 1]), 1);
     float endAlpha = amt * 0.36;
     float step = (endAlpha - startAlpha) / 75.0;
+	llOwnerSay("step " + (string)step);
     float alpha = startAlpha;
     integer i;
     for (i = 0; i < 74; i++) {
@@ -85,7 +86,7 @@ SetFaceState(integer mouth, integer eyes) {
     if (mouth > -1) llRegionSayTo(owner, 42, "EyelidState|0|" + (string)eyes);
 }
 
-SetAll(integer mouth, integer eyes, float spines, float blush) { SetFaceState(mouth, eyes); SetSpineExpression(spines); SetBlush(blush); }
+SetAll(integer mouth, integer eyes, float spines, float blush) { SetFaceState(mouth, eyes); LerpSpineExpression(spines); SetBlush(blush); }
 
 OnCommand(string cmd) {
     list tk = llParseString2List(cmd, [" "], []);
@@ -100,14 +101,10 @@ default
         //
     }
 
-    touch_start(integer total_number)
+    /*touch_start(integer total_number)
     {
-        /*numSteps++;
-        if (numSteps == 5) numSteps = 0;
-        SetSpineExpression(0.25 * numSteps);*/
-        //DoMood("subby");
-        //Emote("test");
-    }
+        //
+    }*/
     
     link_message(integer sender_num, integer num, string msg, key id) {
         if (num != -7993) return; // not a plugin message

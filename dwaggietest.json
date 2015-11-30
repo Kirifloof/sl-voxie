@@ -38,9 +38,12 @@
             "sleep 1",
         ],
         "testyderp": [
+			"{ if banana"
             "debug Hello testyderp",
             "sleep 5",
             "debug Happy Halloween",
+			"}",
+			"debug end test",
         ]
     },
     
