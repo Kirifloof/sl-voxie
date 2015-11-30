@@ -1,0 +1,50 @@
+{
+    "aliases": {
+        "mood": { },
+        "expression": { },
+        "emote": { "eep": ["banana", "polyphemus"] },
+    },
+    
+    "expressions": {
+        "idle": [
+            "plugin kobold 0 0 0 nan",
+        ],
+        "idle.excited": [
+            "plugin kobold 7 0 1.0 nan",
+        ],
+        "idle.subby": [
+            "plugin kobold 0 0 -1.0 1.0",
+        ],
+        "idle.annoyed": [
+            "plugin kobold 0 5 -0.15 0",
+        ],
+        "idle.smug": [
+            "plugin kobold 2 2 0.5 0",
+        ],
+        
+        "oralfixation": [
+            "plugin kobold 13 0 -0.5 1",
+        ]
+    },
+    
+    "emotes": {
+        "_reset": [ "plugin kobold 0 0 0 0" ],
+        
+        "blush": [ "plugin kobold -1 -1 nan 1.0" ],
+        "unblush": [ "plugin kobold -1 -1 nan 0.0" ],
+        
+        "eep": [
+            "plugin kobold 15 0 1.0 nan",
+            "sleep 1",
+        ],
+        "testyderp": [
+            "debug Hello testyderp",
+            "sleep 5",
+            "debug Happy Halloween",
+        ]
+    },
+    
+    "sounds": {
+        "squeak": ["uuid1", "uuid2", "uuid3"],
+    }
+}
