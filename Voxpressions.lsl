@@ -1,5 +1,5 @@
 ////////////////
-string defURL = "http://pastebin.com/raw.php?i=3EeDXYVE";
+string defURL = "https://github.com/Kirifloof/sl-voxie/raw/master/dwaggietest.json";
 ////////////////
 
 list aliasMood;
