@@ -7,6 +7,7 @@
     
     "expressions": {
         "idle": [
+            "{ if moodswitch", "plugin kobold -1 -1 nan 0", "}",
             "plugin kobold 0 0 0 nan",
         ],
         "idle.excited": [
@@ -38,12 +39,12 @@
             "sleep 1",
         ],
         "testyderp": [
-			"{ if banana",
+            "{ if banana",
             "debug Hello testyderp",
             "sleep 5",
             "debug Happy Halloween",
-			"}",
-			"debug end test",
+            "}",
+            "debug end test",
         ]
     },
     

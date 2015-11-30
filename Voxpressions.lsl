@@ -119,7 +119,7 @@ string GetState(string name, integer isEmote) {
 InitSequence(string seq) {
     pc = 0;
     sequence = llJson2List(seq);
-	seqflags = [];
+    seqflags = [];
     llSetTimerEvent(0);
 }
 RunSequence() {
@@ -156,28 +156,29 @@ RunSequence() {
         else if (cmd == "mood") {
             // ...
         }
-		else if (cmd == "{") {
-			// conditional!
-			string scmd = llToLower(llList2String(ct, 1));
-			if (scmd == "if") {
-				// rudimentary for now
-				if (llListFindList(seqflags, [llList2String(ct, 2)]) == -1) {
-					integer lv = 1;
-					while (lv > 0) {
-						pc++;
-						if (pc >= llGetListLength(sequence)) jump afterSCmds; // bleh
-						string token = llList2String(llParseString2List(llList2String(sequence, pc), [" "], []), 0);
-						if (token == "{") lv++;
-						else if (token == "}") lv--;
-					}
-				}
-			}
-		}
+        else if (cmd == "{") {
+            // conditional!
+            string scmd = llToLower(llList2String(ct, 1));
+            if (scmd == "if") {
+                // rudimentary for now
+                if (llListFindList(seqflags, [llList2String(ct, 2)]) == -1) {
+                    integer lv = 1;
+                    while (lv > 0) {
+                        pc++;
+                        if (pc >= llGetListLength(sequence)) jump afterSCmds; // bleh
+                        string token = llList2String(llParseString2List(llList2String(sequence, pc), [" "], []), 0);
+                        
+                        if (token == "{") lv++;
+                        else if (token == "}") lv--;
+                    }
+                }
+            }
+        }
         else if (cmd == "debug") {
             llOwnerSay("/me [DEBUG] " + llDumpList2String(llList2List(ct, 1, -1), " "));
         }
     }
-	@afterSCmds;
+    @afterSCmds;
     // after emote end, step down
     if (stateEmote != "") {
         // step down... NYI
@@ -206,6 +207,7 @@ OnCommand(string msg, key sender, integer fromOwner) {
             stateMood = new;
             if (llSubStringIndex(stateMood, ".") == -1) {
                 InitSequence(GetState(GetCurrentExpression(), FALSE));
+                seqflags += ["moodswitch"];
                 RunSequence();
             }
         }
@@ -218,6 +220,7 @@ OnCommand(string msg, key sender, integer fromOwner) {
         stateExpression = new;
         if (new != old) {
             InitSequence(GetState(GetCurrentExpression(), FALSE));
+            seqflags += ["expswitch"];
             RunSequence();
         }
     }
@@ -228,6 +231,7 @@ OnCommand(string msg, key sender, integer fromOwner) {
         stateExpressionOvrKey = sender;
         if (shouldStartNew) {
             InitSequence(GetState(GetCurrentExpression(), FALSE));
+            seqflags += ["expswitch"];
             RunSequence();
         }
     }
@@ -239,6 +243,7 @@ OnCommand(string msg, key sender, integer fromOwner) {
             
             if (shouldStartNew) {
                 InitSequence(GetState(GetCurrentExpression(), FALSE));
+                seqflags += ["expswitch"];
                 RunSequence();
             }
         }
