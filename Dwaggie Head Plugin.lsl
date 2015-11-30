@@ -50,6 +50,7 @@ SetSpineExpressionRaw(float amt) {
     }
 }
 LerpSpineExpression(float amt) {
+    if (amt != amt) return; // no change if not a number
     float step = (amt - lastExpression) / 25.0;
     float c = lastExpression;
     integer i;
@@ -66,7 +67,6 @@ SetBlush(float amt) {
     float startAlpha = llList2Float(llGetLinkPrimitiveParams(lnBlush, [PRIM_COLOR, 1]), 1);
     float endAlpha = amt * 0.36;
     float step = (endAlpha - startAlpha) / 75.0;
-	llOwnerSay("step " + (string)step);
     float alpha = startAlpha;
     integer i;
     for (i = 0; i < 74; i++) {
